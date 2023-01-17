@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import { panels } from "./panels";
 
-function App() {
+const App = () => {
+  const [activePanel, setActivePanel] = useState(0);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="container">
+      {panels.map((panel, index) => (
+        <div
+          key={index}
+          className={`panel ${index === activePanel ? "active" : ""}`}
+          style={{ backgroundImage: `url(${panel.background})` }}
+          onClick={() => setActivePanel(index)}
         >
-          Learn React
-        </a>
-      </header>
+          <h3>{panel.title}</h3>
+        </div>
+      ))}
     </div>
   );
-}
+};
 
 export default App;
